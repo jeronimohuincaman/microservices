@@ -1,0 +1,25 @@
+<nav [ngClass]="isOpen ? 'w-64' : 'w-20'"
+    class="h-screen bg-primary text-white flex flex-col shadow-lg transition-all duration-300">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 border-b border-gray-300">
+        <span *ngIf="isOpen" class="text-xl font-bold">MiApp</span>
+        <button (click)="isOpen = !isOpen" class="p-2 rounded hover:bg-gray-800 transition">
+            <span class="material-icons-outlined">
+                {{ isOpen ? 'chevron_left' : 'chevron_right' }}
+            </span>
+        </button>
+    </div>
+
+    <!-- Lista de items -->
+    <ul class="flex-1 p-2 space-y-2">
+        <li *ngFor="let item of menuItems">
+            <a [routerLink]="item.route" routerLinkActive="bg-gray-700"
+                class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition">
+                <span class="material-icons-outlined mr-3">{{ item.icon }}</span>
+                <span *ngIf="isOpen">{{ item.label }}</span>
+            </a>
+        </li>
+    </ul>
+
+</nav>
