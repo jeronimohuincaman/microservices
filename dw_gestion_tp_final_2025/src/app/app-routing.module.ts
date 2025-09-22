@@ -12,7 +12,8 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       { path: 'usuarios', component: UsuariosComponent },
-      { path: 'facturas', component: FacturasComponent }
+      { path: 'facturas', component: FacturasComponent },
+      { path: 'productos', component: FacturasComponent }
     ]
   },
   { path: '**', redirectTo: '' } // ruta wildcard
