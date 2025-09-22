@@ -15,8 +15,10 @@
     <ul class="flex-1 p-2 space-y-2">
         <li *ngFor="let item of menuItems">
             <a [routerLink]="item.route" routerLinkActive="bg-gray-700"
-                class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition">
-                <span class="material-icons-outlined mr-3">{{ item.icon }}</span>
+                [ngClass]="isOpen ? 'flex items-center p-3 rounded-lg hover:bg-gray-800 transition' : 'flex flex-col items-center justify-center p-3 rounded-lg hover:bg-gray-800 transition'">
+                <span class="material-icons-outlined" [ngClass]="isOpen ? 'mr-3' : 'mb-1'">
+                    {{ item.icon }}
+                </span>
                 <span *ngIf="isOpen">{{ item.label }}</span>
             </a>
         </li>
