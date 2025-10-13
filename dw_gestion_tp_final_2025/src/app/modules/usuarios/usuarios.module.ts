@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsuariosComponent } from './components/usuarios.component';
+import { RouterModule, Routes } from '@angular/router';
 
+const routes: Routes = [
+  { path: '', component: UsuariosComponent }
+];
 
 
 @NgModule({
@@ -9,7 +13,8 @@ import { UsuariosComponent } from './components/usuarios.component';
     UsuariosComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class UsuariosModule { }

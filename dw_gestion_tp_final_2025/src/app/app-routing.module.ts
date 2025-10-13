@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './modules/home/components/home.component';
-import { FacturasComponent } from './modules/facturas/components/facturas.component';
-import { UsuariosComponent } from './modules/usuarios/components/usuarios.component';
-import { ProductosComponent } from './modules/productos/components/productos.component';
 
 const routes: Routes = [
   {
@@ -12,12 +9,24 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: HomeComponent },
-      { path: 'usuarios', component: UsuariosComponent },
-      { path: 'facturas', component: FacturasComponent },
-      { path: 'productos', component: ProductosComponent }
+      {
+        path: 'facturas',
+        loadChildren: () =>
+          import('./modules/facturas/facturas.module').then(m => m.FacturasModule)
+      },
+      {
+        path: 'usuarios',
+        loadChildren: () =>
+          import('./modules/usuarios/usuarios.module').then(m => m.UsuariosModule)
+      },
+      {
+        path: 'productos',
+        loadChildren: () =>
+          import('./modules/productos/productos.module').then(m => m.ProductosModule)
+      }
     ]
   },
-  { path: '**', redirectTo: '' } // ruta wildcard
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
