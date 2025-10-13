@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-tabla-dinamica',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./tabla-dinamica.component.scss']
 })
 export class TablaDinamicaComponent {
-
+  @Input() columnsNames: string[] = [];
+  @Input() columnsKey: string[] = [];
+  @Input() data: any[] = [];
 }
