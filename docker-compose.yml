@@ -11,8 +11,8 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./data:/data/db
-      - ./config:/data/configdb
+      - data:/data/db
+      - config:/data/configdb
     healthcheck:
       test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'rs0',members:[{_id:0,host:'mongo:27017'}]}) }" | mongosh --port 27017 --quiet
       interval: 5s
@@ -65,7 +65,7 @@ services:
       - backend
 
   app-users:
-    build: ./app-users
+    build: ./ms-app-user
     container_name: app-users
     depends_on:
       mysql:
@@ -98,7 +98,7 @@ services:
       - backend
 
   app-productos:
-    build: ./app-productos
+    build: ./ms-app-productos
     container_name: app-productos
     depends_on:
       - postgres
@@ -112,7 +112,7 @@ services:
       - backend
 
   app-facturas:
-    build: ./app-facturas
+    build: ./ms-app-facturas
     container_name: app-facturas
     depends_on:
       mongo:
@@ -127,7 +127,7 @@ services:
       - backend
 
   gateway:
-    build: ./gateway
+    build: ./gateway-its
     container_name: gateway
     ports:
       - 3000:3000
