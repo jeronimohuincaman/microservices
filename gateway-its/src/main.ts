@@ -18,6 +18,8 @@ async function bootstrap() {
 
   app.useGlobalFilters(new RpcCustomExceptionFilter());
 
+  app.enableCors();
+
   console.info(`Gateway escuchando desde le puerto: ${envs.PORT}`);
   await app.listen(envs.PORT, '0.0.0.0');
 }
