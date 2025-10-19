@@ -1,2 +1,7 @@
-<p>facturas works!</p>
+<div class="toolbar my-2 flex justify-end">
+    <button mat-raised-button color="primary" (click)="saveFactura()">
+        <mat-icon>add</mat-icon>
+        Nueva Factura
+    </button>
+</div>
 <app-tabla-dinamica [columnsNames]="columnsNames" [columnsKey]="columnsKey" [data]="data"></app-tabla-dinamica>
