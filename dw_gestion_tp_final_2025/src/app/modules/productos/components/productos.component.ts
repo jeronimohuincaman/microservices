@@ -1,15 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ProductosService } from '../service/productos.service';
 
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.scss'
 })
-export class ProductosComponent {
-  columnsNames: string[] = ['ID', 'Nombre', 'Precio'];
-  columnsKey: string[] = ['id', 'nombre', 'precio'];
+export class ProductosComponent implements OnInit {
+  columnsNames: string[] = ['ID', 'Descripción', 'Precio'];
+  columnsKey: string[] = ['id', 'name', 'price'];
   data: any[] = [
-    { id: 1, nombre: 'Artículo A', precio: 1200 },
-    { id: 2, nombre: 'Artículo B', precio: 850 }
+    // { id: 1, nombre: 'Artículo A', precio: 1200 },
+    // { id: 2, nombre: 'Artículo B', precio: 850 }
   ];
+
+  constructor(
+    private _productosService: ProductosService
+  ) { }
+
+  ngOnInit(): void {
+    this.getProductos();
+  }
+
+
+  getProductos() {
+    this._productosService.getProductos().subscribe({
+      next: (productos) => {
+        console.log('productos:', productos);
+        this.data = productos;
+      },
+      error: (err) => {
+        console.error('Error al obtener productos', err);
+      }
+    });
+  }
 }

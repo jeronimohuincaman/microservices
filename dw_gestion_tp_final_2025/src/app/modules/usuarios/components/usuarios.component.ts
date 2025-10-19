@@ -10,15 +10,15 @@ export class UsuariosComponent implements OnInit {
   columnsNames: string[] = ['ID', 'Nombre', 'Apellido'];
   columnsKey: string[] = ['id', 'firstName', 'lastName'];
   data: any[] = [
-    {
-      "id": 1,
-      "firstName": "Jeronimo Ezequiel",
-      "lastName": "Huincaman",
-      "isActive": true,
-      "createdAt": "2025-10-14T23:46:48.783Z",
-      "updatedAt": "2025-10-14T23:46:48.783Z",
-      "deletedAt": null
-    }
+    // {
+    //   "id": 1,
+    //   "firstName": "Jeronimo Ezequiel",
+    //   "lastName": "Huincaman",
+    //   "isActive": true,
+    //   "createdAt": "2025-10-14T23:46:48.783Z",
+    //   "updatedAt": "2025-10-14T23:46:48.783Z",
+    //   "deletedAt": null
+    // }
   ];
 
   constructor(
