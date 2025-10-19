@@ -1,2 +1,8 @@
-<p>productos works!</p>
+<div class="toolbar my-2 flex justify-end">
+    <button mat-raised-button color="primary" (click)="saveProducto()">
+        <mat-icon>add</mat-icon>
+        Nuevo Producto
+    </button>
+</div>
+
 <app-tabla-dinamica [columnsNames]="columnsNames" [columnsKey]="columnsKey" [data]="data"></app-tabla-dinamica>
