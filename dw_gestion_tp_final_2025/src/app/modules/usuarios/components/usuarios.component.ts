@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../service/usuarios.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuarios',
@@ -22,7 +23,8 @@ export class UsuariosComponent implements OnInit {
   ];
 
   constructor(
-    private _usuariosService: UsuariosService
+    private _usuariosService: UsuariosService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -42,4 +44,7 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
+  saveUsuario() {
+    this.router.navigate(['usuarios/alta']);
+  }
 }
