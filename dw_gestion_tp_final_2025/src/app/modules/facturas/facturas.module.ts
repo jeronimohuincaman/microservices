@@ -3,14 +3,17 @@ import { CommonModule } from '@angular/common';
 import { FacturasComponent } from './components/facturas.component';
 import { TablaDinamicaModule } from "../../shared/tabla-dinamica/tabla-dinamica.module";
 import { RouterModule, Routes } from '@angular/router';
+import { AltaEdicionComponent } from './components/alta-edicion/alta-edicion.component';
 
 const routes: Routes = [
-  { path: '', component: FacturasComponent }
+  { path: '', component: FacturasComponent },
+  { path: 'alta', component: AltaEdicionComponent }
 ];
 
 @NgModule({
   declarations: [
-    FacturasComponent
+    FacturasComponent,
+    AltaEdicionComponent
   ],
   imports: [
     CommonModule,
