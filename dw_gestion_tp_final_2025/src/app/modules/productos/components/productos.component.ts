@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductosService } from '../service/productos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-productos',
@@ -15,7 +16,8 @@ export class ProductosComponent implements OnInit {
   ];
 
   constructor(
-    private _productosService: ProductosService
+    private _productosService: ProductosService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -33,5 +35,9 @@ export class ProductosComponent implements OnInit {
         console.error('Error al obtener productos', err);
       }
     });
+  }
+
+  saveProducto() {
+    this.router.navigate(['productos/alta']);
   }
 }
