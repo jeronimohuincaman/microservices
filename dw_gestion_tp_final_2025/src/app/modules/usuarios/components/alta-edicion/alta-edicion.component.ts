@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alta-edicion',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: './alta-edicion.component.scss'
 })
 export class AltaEdicionComponent {
+
+  constructor(
+    private router: Router
+  ) { }
+
+  goBack() {
+    this.router.navigate(['usuarios']);
+  }
 
 }

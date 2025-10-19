@@ -1,2 +1,9 @@
-<p>usuarios works!</p>
-<app-tabla-dinamica [columnsNames]="columnsNames" [columnsKey]="columnsKey" [data]="data"></app-tabla-dinamica>
+<div class="toolbar my-2 flex justify-end">
+    <button mat-raised-button color="primary" (click)="saveUsuario()">
+        <mat-icon>add</mat-icon>
+        Nuevo Usuario
+    </button>
+</div>
+
+<app-tabla-dinamica [columnsNames]="columnsNames" [columnsKey]="columnsKey" [data]="data">
+</app-tabla-dinamica>

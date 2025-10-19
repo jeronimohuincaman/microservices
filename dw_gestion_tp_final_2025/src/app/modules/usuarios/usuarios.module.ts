@@ -4,6 +4,7 @@ import { UsuariosComponent } from './components/usuarios.component';
 import { RouterModule, Routes } from '@angular/router';
 import { TablaDinamicaModule } from '../../shared/tabla-dinamica/tabla-dinamica.module';
 import { AltaEdicionComponent } from './components/alta-edicion/alta-edicion.component';
+import { MaterialModule } from '../../shared/material/material.module';
 
 const routes: Routes = [
   { path: '', component: UsuariosComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     TablaDinamicaModule,
+    MaterialModule,
     RouterModule.forChild(routes)
   ]
 })
