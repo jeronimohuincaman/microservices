@@ -4,4 +4,36 @@
         Volver
     </button>
 </div>
-<p>alta-edicion works!</p>
+
+<div class="container max-w-md mx-auto bg-white shadow-md rounded-2xl p-6 mt-4">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
+        <!-- Nombre -->
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="firstName" />
+        </mat-form-field>
+
+        <!-- Apellido -->
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="lastName" />
+        </mat-form-field>
+
+        <!-- Activo -->
+        <mat-slide-toggle formControlName="isActive">
+            Activo
+        </mat-slide-toggle>
+
+        <!-- Botón guardar -->
+        <div class="flex justify-end mt-4">
+            <button mat-raised-button color="accent" type="submit" [disabled]="form.invalid">
+                <mat-icon>save</mat-icon>
+                Guardar
+            </button>
+        </div>
+
+    </form>
+
+</div>
