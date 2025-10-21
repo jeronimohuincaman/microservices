@@ -19,4 +19,8 @@ export class FacturasService {
   saveFactura(payload: dtoCreateFactura) {
     return this.http.post<any>(`${environment.facturas}`, payload);
   }
+
+  deleteFactura(id: number) {
+    return this.http.delete<any>(`${environment.facturas}/${id}`)
+  }
 }
