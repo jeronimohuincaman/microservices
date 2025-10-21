@@ -19,4 +19,8 @@ export class ProductosService {
   saveProducto(payload: dtoCreateProducto) {
     return this.http.post<any>(`${environment.productos}`, payload);
   }
+
+  deleteProducto(id: number) {
+    return this.http.delete<any>(`${environment.productos}/${id}`)
+  }
 }
