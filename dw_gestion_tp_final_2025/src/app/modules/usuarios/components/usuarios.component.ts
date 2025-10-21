@@ -70,6 +70,16 @@ export class UsuariosComponent implements OnInit {
       if (result === true) {
         console.log('Usuario eliminado:', element);
         // aquí hacés la llamada al servicio o lo que necesites
+
+        this._usuariosService.deleteUsuario(element.value.id).subscribe({
+          next: (res) => {
+            this.getUsuarios();
+          },
+          error: (error) => {
+            console.error('Error al eliminar usuario', error);
+          }
+        })
+
       }
     });
   }
