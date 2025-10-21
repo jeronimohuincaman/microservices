@@ -6,17 +6,8 @@ import { RouterModule } from '@angular/router';
 import { HeaderbarComponent } from './headerbar/headerbar.component';
 
 @NgModule({
-  declarations: [
-    LayoutComponent,
-    SidebarComponent,
-    HeaderbarComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  exports: [
-    LayoutComponent
-  ]
+  declarations: [LayoutComponent, SidebarComponent, HeaderbarComponent],
+  imports: [CommonModule, RouterModule],
+  exports: [HeaderbarComponent, LayoutComponent],
 })
 export class LayoutModule {}

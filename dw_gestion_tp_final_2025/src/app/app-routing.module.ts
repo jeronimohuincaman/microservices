@@ -23,9 +23,20 @@ const routes: Routes = [
         path: 'productos',
         loadChildren: () =>
           import('./modules/productos/productos.module').then(m => m.ProductosModule)
+      },
+      {
+        path:'sobre-nosotros',
+        loadChildren: () =>
+          import('./shared/components/sobre-nosotros/sobre-nosotros.module').then(m => m.SobreNosotrosModule)
+      },
+      {
+        path:'consigna',
+        loadChildren: () =>
+          import('./shared/components/consigna/consigna.module').then(m => m.ConsignaModule)
       }
     ]
   },
+
   { path: '**', redirectTo: '' }
 ];
 

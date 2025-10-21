@@ -13,12 +13,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 @NgModule({
   imports: [
     CommonModule,
-
-    // Módulos Material
     MatButtonModule,
     MatIconModule,
     MatTableModule,
@@ -29,7 +32,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSnackBarModule,
     MatCardModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDividerModule,
+    MatGridListModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     // Exportarlos para que estén disponibles en cualquier módulo que lo importe
@@ -43,7 +50,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSnackBarModule,
     MatCardModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDividerModule,
+    MatGridListModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
   ]
 })
-export class MaterialModule { }
+export class MaterialModule {}
