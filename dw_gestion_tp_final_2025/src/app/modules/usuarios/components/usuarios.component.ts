@@ -38,7 +38,6 @@ export class UsuariosComponent implements OnInit {
   getUsuarios() {
     this._usuariosService.getUsuarios().subscribe({
       next: (usuarios) => {
-        console.log('Usuarios:', usuarios);
         this.data = usuarios?.data;
       },
       error: (err) => {
@@ -48,7 +47,6 @@ export class UsuariosComponent implements OnInit {
   }
 
   getAccion(element: any) {
-    console.log(element)
     if (element.type === 'delete') {
       this.deleteUsuario(element);
     }
@@ -59,14 +57,12 @@ export class UsuariosComponent implements OnInit {
   }
 
   deleteUsuario(element: any) {
-    console.log(element)
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: { mensaje: 'Está a punto de eliminar un usuario ¿Desea continuar?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
       if (result === true) {
         console.log('Usuario eliminado:', element);
         // aquí hacés la llamada al servicio o lo que necesites
