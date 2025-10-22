@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, Inject, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Logger, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { catchError } from 'rxjs';
 import { PaginationDto } from 'src/common';
 
 @Controller('users')
 export class UsersController {
+  private readonly logger = new Logger(UsersController.name) // Le da el nombre "UserService"
+
   constructor(
     @Inject('MS_USER') private readonly userClient: ClientProxy
   ) { }
@@ -28,6 +30,7 @@ export class UsersController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
+    this.logger.log('gateway find one user controller ', id)
     return this.userClient.send('find_one_user', { id: id }).pipe(
       catchError((error) => {
         throw new RpcException(error); // Lanza la excepción para que el cliente la maneje
@@ -36,13 +39,22 @@ export class UsersController {
   }
 
   @Delete(':id')
-  removeUser(@Param('id') id: string) {
-    return `Eliminar usuario ${id}`;
+  removeUser(@Param('id', ParseIntPipe) id: number) {
+    this.logger.log('gateway remove user controller ', id);
+    return this.userClient.send('delete_user', { id }).pipe(
+      catchError((error) => {
+        throw new RpcException(error);
+      })
+    );
   }
 
   @Patch(':id')
-  patchUser(@Param('id') id: string) {
-    return `Actualizar usuario ${id}`;
+  patchUser(@Param('id', ParseIntPipe) id: number, @Body() updateUserDto) {
+    return this.userClient.send('update_user', { id, updateUserDto }).pipe(
+      catchError((error) => {
+        throw new RpcException(error); // Lanza la excepción para que el cliente la maneje
+      })
+    );
   }
 
 }
