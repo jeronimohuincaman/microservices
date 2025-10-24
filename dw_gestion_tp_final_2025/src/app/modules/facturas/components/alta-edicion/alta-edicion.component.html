@@ -1,7 +1,113 @@
+<!-- Toolbar -->
 <div class="toolbar my-2 flex justify-start">
     <button mat-raised-button color="primary" (click)="goBack()">
         <mat-icon>arrow_back</mat-icon>
         Volver
     </button>
 </div>
-<p>alta-edicion works!</p>
+
+<!-- Contenedor principal -->
+<div class="container max-w-3xl mx-auto bg-white shadow-md rounded-2xl p-6 mt-4">
+
+    <form [formGroup]="form" class="flex flex-col gap-6">
+
+        <!-- CABECERA DE FACTURA -->
+        <h6 class="text-lg font-semibold mt-2 mb-1">Factura</h6>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Número de Factura</mat-label>
+                <input matInput type="number" formControlName="numero" (keydown.enter)="seleccionItem($event, true, 'cliente')"/>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Cliente</mat-label>
+                <input matInput formControlName="cliente" (keydown.enter)="seleccionItem($event, true, 'descripcion')"/>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Total</mat-label>
+                <input matInput type="number" formControlName="total" readonly />
+            </mat-form-field>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <!-- SECCIÓN DE ÍTEMS -->
+        <h6 class="text-lg font-semibold mt-2 mb-1">Agregar ítems</h6>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Descripción</mat-label>
+                <input matInput formControlName="descripcion" (keydown.enter)="seleccionItem($event, true, 'cantidad')" />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Cantidad</mat-label>
+                <input matInput type="number" formControlName="cantidad" (keydown.enter)="seleccionItem($event, true, 'precio')"/>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Precio</mat-label>
+                <input matInput type="number" formControlName="precio" (keydown.enter)="addItem($event); seleccionItem($event, true, 'descripcion')"/>
+            </mat-form-field>
+
+            <div class="flex justify-end mt-2 md:col-span-3">
+                <button mat-raised-button color="primary" type="button" (click)="addItem()"
+                    [disabled]="isAddItemInvalid">
+                    <mat-icon>add</mat-icon>
+                    Agregar ítem
+                </button>
+            </div>
+        </div>
+
+        <!-- TABLA DE ÍTEMS -->
+        <div *ngIf="items_factura.length > 0" class="mt-4 overflow-x-auto">
+            <table mat-table [dataSource]="items_factura" class="w-full">
+
+                <!-- Descripción -->
+                <ng-container matColumnDef="descripcion">
+                    <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                    <td mat-cell *matCellDef="let item"> {{ item.descripcion }} </td>
+                </ng-container>
+
+                <!-- Cantidad -->
+                <ng-container matColumnDef="cantidad">
+                    <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+                    <td mat-cell *matCellDef="let item"> {{ item.cantidad }} </td>
+                </ng-container>
+
+                <!-- Precio -->
+                <ng-container matColumnDef="precio">
+                    <th mat-header-cell *matHeaderCellDef> Precio </th>
+                    <td mat-cell *matCellDef="let item"> ${{ item.precio | number: '1.2-2' }} </td>
+                </ng-container>
+
+                <!-- Acción -->
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef class="text-center"> Acciones </th>
+                    <td mat-cell *matCellDef="let item" class="text-center">
+                        <button mat-icon-button color="warn" (click)="removeItem(item)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['descripcion','cantidad','precio','acciones']"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['descripcion','cantidad','precio','acciones'];"></tr>
+
+            </table>
+        </div>
+
+        <!-- BOTÓN GUARDAR -->
+        <div class="flex justify-end mt-6">
+            <button mat-raised-button color="accent" (click)="onSubmit()" [disabled]="items_factura.length === 0">
+                <mat-icon>save</mat-icon>
+                Guardar Factura
+            </button>
+        </div>
+
+    </form>
+
+</div>

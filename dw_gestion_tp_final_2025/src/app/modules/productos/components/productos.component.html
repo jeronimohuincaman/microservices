@@ -5,4 +5,4 @@
     </button>
 </div>
 
-<app-tabla-dinamica [columnsNames]="columnsNames" [columnsKey]="columnsKey" [data]="data"></app-tabla-dinamica>
+<app-tabla-dinamica [columnsNames]="columnsNames" [columnsKey]="columnsKey" [data]="data" (accionRealizada)="getAccion($event)"></app-tabla-dinamica>

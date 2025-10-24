@@ -37,6 +37,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatGridListModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    MatDividerModule
   ],
   exports: [
     // Exportarlos para que estén disponibles en cualquier módulo que lo importe
@@ -55,6 +56,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatGridListModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    MatDividerModule
   ]
 })
 export class MaterialModule {}

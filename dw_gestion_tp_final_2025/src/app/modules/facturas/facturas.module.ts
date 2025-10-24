@@ -5,6 +5,7 @@ import { TablaDinamicaModule } from "../../shared/tabla-dinamica/tabla-dinamica.
 import { RouterModule, Routes } from '@angular/router';
 import { AltaEdicionComponent } from './components/alta-edicion/alta-edicion.component';
 import { MaterialModule } from '../../shared/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: FacturasComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
     CommonModule,
     TablaDinamicaModule,
     MaterialModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ]
 })

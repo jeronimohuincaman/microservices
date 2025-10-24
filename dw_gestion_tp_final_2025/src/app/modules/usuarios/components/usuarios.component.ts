@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../service/usuarios.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-usuarios',
@@ -8,8 +10,8 @@ import { Router } from '@angular/router';
   styleUrl: './usuarios.component.scss'
 })
 export class UsuariosComponent implements OnInit {
-  columnsNames: string[] = ['ID', 'Nombre', 'Apellido'];
-  columnsKey: string[] = ['id', 'firstName', 'lastName'];
+  columnsNames: string[] = ['ID', 'Nombre', 'Apellido', 'Acciones'];
+  columnsKey: string[] = ['id', 'firstName', 'lastName', 'acciones'];
   data: any[] = [
     // {
     //   "id": 1,
@@ -24,7 +26,8 @@ export class UsuariosComponent implements OnInit {
 
   constructor(
     private _usuariosService: UsuariosService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +38,6 @@ export class UsuariosComponent implements OnInit {
   getUsuarios() {
     this._usuariosService.getUsuarios().subscribe({
       next: (usuarios) => {
-        console.log('Usuarios:', usuarios);
         this.data = usuarios?.data;
       },
       error: (err) => {
@@ -44,7 +46,37 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
+  getAccion(element: any) {
+    if (element.type === 'delete') {
+      this.deleteUsuario(element);
+    }
+  }
+
   saveUsuario() {
     this.router.navigate(['usuarios/alta']);
+  }
+
+  deleteUsuario(element: any) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: { mensaje: 'Está a punto de eliminar un usuario ¿Desea continuar?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        console.log('Usuario eliminado:', element);
+        // aquí hacés la llamada al servicio o lo que necesites
+
+        this._usuariosService.deleteUsuario(element.value.id).subscribe({
+          next: (res) => {
+            this.getUsuarios();
+          },
+          error: (error) => {
+            console.error('Error al eliminar usuario', error);
+          }
+        })
+
+      }
+    });
   }
 }

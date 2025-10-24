@@ -17,6 +17,7 @@ export class UserService {
   ) { }
 
   async create(createUserDto: CreateUserDto) {
+    this.logger.log('service create', createUserDto);
     const user = this.userRepository.create(createUserDto);
     return this.userRepository.save(user);
   }
@@ -41,8 +42,11 @@ export class UserService {
   async findOne(id: number): Promise<User> {
     const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
-      throw new RpcException({message: `User with ID ${id} not found`, status: HttpStatus.NOT_FOUND});
+      this.logger.log('service findOne not found', id);
+      throw new RpcException({ message: `User with ID ${id} not found`, status: HttpStatus.NOT_FOUND });
     }
+
+    this.logger.log('service findOne', id);
     return user;
   }
 
@@ -52,6 +56,7 @@ export class UserService {
 
     Object.assign(user, data);
 
+    this.logger.log('service update', id, updateUserDto);
     return this.userRepository.save(user);
   }
 
@@ -59,10 +64,15 @@ export class UserService {
     const user = await this.userRepository.findOne({ where: { id } });
 
     if (!user) {
+      this.logger.warn(`User with ID ${id} not found - delete aborted`);
       throw new NotFoundException(`User with ID ${id} not found`);
     }
 
     await this.userRepository.softRemove(user);
+
+    this.logger.log(`User with ID ${id} has been soft-deleted successfully`);
+
+    return { message: `User with ID ${id} deleted successfully` };
   }
 
 }

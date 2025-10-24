@@ -16,7 +16,11 @@ export class UsuariosService {
     return this.http.get<any>(`${environment.usuarios}`);
   }
 
-    saveUsuario(payload: dtoCreateUsuario) {
-      return this.http.post<any>(`${environment.usuarios}`, payload);
-    }
+  saveUsuario(payload: dtoCreateUsuario) {
+    return this.http.post<any>(`${environment.usuarios}`, payload);
+  }
+
+  deleteUsuario(id: number) {
+    return this.http.delete<any>(`${environment.usuarios}/${id}`)
+  }
 }
